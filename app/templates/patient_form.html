@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>{{ 'Редактирование пациента' if patient else 'Новый пациент' }}</h2>
+  <form method="post">
+    <label>Имя*:
+      <input type="text" name="full_name" value="{{ patient.full_name if patient else '' }}" required />
+    </label><br />
+    <label>Вид*:
+      <input type="text" name="species" value="{{ patient.species if patient else '' }}" required />
+    </label><br />
+    <label>Порода:
+      <input type="text" name="breed" value="{{ patient.breed if patient else '' }}" />
+    </label><br />
+    <label>Дата рождения:
+      <input type="date" name="birth_date"
+             value="{{ patient.birth_date.isoformat() if patient and patient.birth_date else '' }}" />
+    </label><br />
+    <label>Имя владельца:
+      <input type="text" name="owner_name" value="{{ patient.owner_name if patient else '' }}" />
+    </label><br />
+    <label>Телефон владельца:
+      <input type="text" name="owner_phone" value="{{ patient.owner_phone if patient else '' }}" />
+    </label><br />
+    <button type="submit">Сохранить</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+  <a href="{{ url_for('main.patient_create') }}">Новый пациент</a>
+  <table border="1" cellpadding="4">
+    <tr>
+      <th>ID</th>
+      <th>Имя</th>
+      <th>Вид</th>
+      <th>Порода</th>
+      <th>Владелец</th>
+      <th>Телефон</th>
+      <th>Действия</th>
+    </tr>
+    {% for p in patients %}
+    <tr>
+      <td>{{ p.id }}</td>
+      <td>{{ p.full_name }}</td>
+      <td>{{ p.species }}</td>
+      <td>{{ p.breed or '' }}</td>
+      <td>{{ p.owner_name or '' }}</td>
+      <td>{{ p.owner_phone or '' }}</td>
+      <td>
+        <a href="{{ url_for('main.patient_edit', patient_id=p.id) }}">Редактировать</a>
+        <form action="{{ url_for('main.patient_delete', patient_id=p.id) }}"
+              method="post" style="display:inline">
+          <button type="submit" onclick="return confirm('Удалить пациента?')">
+            Удалить
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

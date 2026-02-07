@@ -1,0 +1,39 @@
+-- пациенты
+CREATE TABLE patients (
+    id           SERIAL PRIMARY KEY,
+    full_name    VARCHAR(255) NOT NULL,
+    species      VARCHAR(100) NOT NULL,   -- собака, кошка и так далее
+    breed        VARCHAR(100),
+    birth_date   DATE,
+    owner_name   VARCHAR(255),
+    owner_phone  VARCHAR(50),
+    created_at   TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+-- врачи
+CREATE TABLE doctors (
+    id         SERIAL PRIMARY KEY,
+    full_name  VARCHAR(255) NOT NULL,
+    specialty  VARCHAR(100)          -- терапевт, хирург и так далее
+);
+
+-- записи к врачу
+CREATE TABLE appointments (
+    id           SERIAL PRIMARY KEY,
+    patient_id   INTEGER NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
+    doctor_id    INTEGER NOT NULL REFERENCES doctors(id),
+    start_time   TIMESTAMP NOT NULL,
+    reason       TEXT,
+    status       VARCHAR(20) NOT NULL DEFAULT 'scheduled' -- scheduled, done, cancelled
+);
+
+-- медицинские записи в карте
+CREATE TABLE medical_records (
+    id             SERIAL PRIMARY KEY,
+    patient_id     INTEGER NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
+    appointment_id INTEGER REFERENCES appointments(id),
+    record_date    TIMESTAMP NOT NULL DEFAULT NOW(),
+    diagnosis      TEXT,
+    treatment      TEXT,
+    notes          TEXT
+);
