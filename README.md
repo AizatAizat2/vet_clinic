@@ -41,10 +41,10 @@ vet_clinic/
 
 Схема описана в `db/schema_db.sql` и содержит таблицы:
 
-- **patients** — пациенты (животные и данные владельца)
-- **doctors** — врачи
-- **appointments** — записи на приём
-- **medical_records** — медицинские записи
+- **patients** - пациенты (животные и данные владельца)
+- **doctors** - врачи
+- **appointments** - записи на приём
+- **medical_records** - медицинские записи
 
 Для основной реализованной функции «Новый пациент» используется таблица `patients` и связанные с ней ORM-модели.
 
@@ -146,12 +146,12 @@ http://127.0.0.1:5000
 
 Доступные страницы:
 
-- `GET /patients` — список всех пациентов
-- `GET /patients/new` — форма создания нового пациента
-- `POST /patients/new` — создание пациента в БД
-- `GET /patients/<id>/edit` — форма редактирования пациента
-- `POST /patients/<id>/edit` — сохранение изменений
-- `POST /patients/<id>/delete` — удаление пациента
+- `GET /patients` - список всех пациентов
+- `GET /patients/new` - форма создания нового пациента
+- `POST /patients/new` - создание пациента в БД
+- `GET /patients/<id>/edit` - форма редактирования пациента
+- `POST /patients/<id>/edit` - сохранение изменений
+- `POST /patients/<id>/delete` - удаление пациента
 
 Все данные сохраняются в таблицу `patients` в базе `vet_clinic` в PostgreSQL через ORM-модель `Patient`.
 
@@ -175,9 +175,9 @@ SELECT * FROM patients;
 
 В `app/models.py` описаны следующие ORM-модели:
 
-- **Patient** — пациенты с полями: `full_name`, `species`, `breed`, `birth_date`, `owner_name`, `owner_phone`
-- **Doctor** — врачи с полями: `full_name`, `specialty`
-- **Appointment** — записи к врачу с привязкой к пациенту и врачу
-- **MedicalRecord** — медицинские записи с диагнозом, лечением и примечаниями
+- **Patient** - пациенты с полями: `full_name`, `species`, `breed`, `birth_date`, `owner_name`, `owner_phone`
+- **Doctor** - врачи с полями: `full_name`, `specialty`
+- **Appointment** - записи к врачу с привязкой к пациенту и врачу
+- **MedicalRecord** - медицинские записи с диагнозом, лечением и примечаниями
 
 Связи между моделями реализованы через `relationship` и внешние ключи.
